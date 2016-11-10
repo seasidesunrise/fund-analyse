@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.tnt.fund.analyse.service.entity.FundCodeMapper">
+
+    <resultMap id="BaseResult" type="com.tnt.fund.analyse.service.entity.FundCode">
+        <result column="FUNDCODE" property="fundCode"/>
+        <result column="FUNDNAME" property="fundName"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        FUNDCODE, FUNDNAME
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResult" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from fundcode
+        where FUNDCODE = #{fundCode, jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectListByMap" resultMap="BaseResult">
+        select
+        <include refid="Base_Column_List"/>
+        from fundcode
+        <where>
+            1 = 1
+            <if test="fundCode != null">
+                AND FUNDCODE = #{fundCode,jdbcType=VARCHAR}
+            </if>
+            <if test="fundName != null">
+                AND FUNDNAME = #{fundName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.tnt.fund.analyse.service.entity.FundCode">
+        update fundcode
+        <set>
+            <if test="fundName != null">
+                FUNDNAME = #{fundName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where FUNDCODE = #{fundCode,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByMap" parameterType="java.util.Map">
+        update fundcode
+        <set>
+            <if test="fundName != null">
+                FUNDNAME = #{fundName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where FUNDCODE = #{fundCode,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="insertSelective" parameterType="com.tnt.fund.analyse.service.entity.FundCode">
+        insert into fundcode
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fundCode != null">
+                FUNDCODE,
+            </if>
+            <if test="fundName != null">
+                FUNDNAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fundCode != null">
+                #{fundCode,jdbcType=VARCHAR},
+            </if>
+            <if test="fundName != null">
+                #{fundName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from fundcode
+        where FUNDCODE = #{fundCode, jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

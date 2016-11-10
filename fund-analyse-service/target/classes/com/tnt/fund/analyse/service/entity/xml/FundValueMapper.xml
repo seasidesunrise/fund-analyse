@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.tnt.fund.analyse.service.entity.FundValueMapper">
+
+    <resultMap id="BaseResult" type="com.tnt.fund.analyse.service.entity.FundValue">
+        <id column="ID" property="id"/>
+        <result column="FUNDCODE" property="fundCode"/>
+        <result column="FSRQ" property="fsrq"/>
+        <result column="DWJZ" property="dwjz"/>
+        <result column="LJJZ" property="ljjz"/>
+
+        <result column="RZZL" property="rzzl"/>
+        <result column="SGZT" property="sgzt"/>
+        <result column="FHSP" property="fhsp"/>
+        <result column="SHZT" property="shzt"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, FUNDCODE, FSRQ, DWJZ, LJJZ, RZZL, SGZT, FHSP, SHZT
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResult" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from fundvalue
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from fundvalue
+        where ID = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insertSelective" parameterType="com.tnt.fund.analyse.service.entity.FundValue">
+        <selectKey keyProperty="id" resultType="long">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into fundvalue
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="fundcode != null">
+                FUNDCODE,
+            </if>
+            <if test="fsrq != null">
+                FSRQ,
+            </if>
+            <if test="dwjz != null">
+                DWJZ,
+            </if>
+            <if test="ljjz != null">
+                LJJZ,
+            </if>
+            <if test="rzzl != null">
+                RZZL,
+            </if>
+            <if test="sgzt != null">
+                SGZT,
+            </if>
+            <if test="fhsp != null">
+                FHSP,
+            </if>
+            <if test="shzt != null">
+                SHZT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="fundcode != null">
+                #{fundcode,jdbcType=VARCHAR},
+            </if>
+            <if test="fsrq != null">
+                #{fsrq,jdbcType=VARCHAR},
+            </if>
+            <if test="dwjz != null">
+                #{dwjz,jdbcType=VARCHAR},
+            </if>
+            <if test="ljjz != null">
+                #{ljjz,jdbcType=VARCHAR},
+            </if>
+            <if test="rzzl != null">
+                #{rzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="sgzt != null">
+                #{sgzt,jdbcType=VARCHAR},
+            </if>
+            <if test="fhsp != null">
+                #{fhsp,jdbcType=VARCHAR},
+            </if>
+            <if test="shzt != null">
+                #{shzt,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.tnt.fund.analyse.service.entity.FundValue">
+        update fundvalue
+        <set>
+            <if test="fundcode != null">
+                FUNDCODE = #{fundcode,jdbcType=VARCHAR},
+            </if>
+            <if test="fsrq != null">
+                FSRQ = #{fsrq,jdbcType=VARCHAR},
+            </if>
+            <if test="dwjz != null">
+                DWJZ = #{dwjz,jdbcType=VARCHAR},
+            </if>
+            <if test="ljjz != null">
+                LJJZ = #{ljjz,jdbcType=VARCHAR},
+            </if>
+            <if test="rzzl != null">
+                RZZL = #{rzzl,jdbcType=VARCHAR},
+            </if>
+            <if test="sgzt != null">
+                SGZT = #{sgzt,jdbcType=VARCHAR},
+            </if>
+            <if test="fhsp != null">
+                FHSP = #{fhsp,jdbcType=VARCHAR},
+            </if>
+            <if test="shzt != null">
+                SHZT = #{shzt,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectListByMap" resultMap="BaseResult">
+        select * from fundvalue
+        <where>
+            1 = 1
+            <if test="fundCode != null">
+                AND FUNDCODE = #{fundCode, jdbcType=VARCHAR}
+            </if>
+            <if test="id != null">
+                AND ID = #{id, jdbcType=INTEGER}
+            </if>
+        </where>
+        order by ID ASC
+    </select>
+
+    <select id="selectPageByMap" resultMap="BaseResult">
+        select <include refid="Base_Column_List"/> from fundvalue
+        order by ID limit #{startRow}, #{maxRowNum}
+    </select>
+
+    <select id="TotalCount" resultType="java.lang.Long">
+        select count(0) from fundvalue
+        <where>
+            1 = 1
+            <if test="fundCode != null">
+                AND FUNDCODE = #{fundCode, jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+</mapper>
