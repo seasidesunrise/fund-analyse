@@ -194,6 +194,7 @@ public class WeekDwjzController {
             mv.addObject("maxCC", dwjzListWithArray.size());
         }
         mv.setViewName("week");
+        mv.addObject("title", "titleTest"); // just for test for jrebel
 
         return mv;
     }

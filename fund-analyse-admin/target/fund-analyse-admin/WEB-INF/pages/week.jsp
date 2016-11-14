@@ -6,6 +6,8 @@
 <%
     List dwjzListWithArray = (List) request.getAttribute("dwjzListWithArray");
     Integer maxCC = (Integer) request.getAttribute("maxCC");
+    String title = (String) request.getAttribute("title");
+    System.out.println("========== title: " + title);
 
     String categoryStr = "[";
     for (int i = 0; i < maxCC; i++) {
@@ -94,7 +96,7 @@
                 text: '基金每日净值走势'
             },
             subtitle: {
-                text: 'Source: WorldClimate.com'
+                text: ''
             },
             xAxis: {
                 categories: <%=categoryStr%>

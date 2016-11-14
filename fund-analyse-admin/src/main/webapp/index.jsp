@@ -17,10 +17,10 @@
                 type: 'line'
             },
             title: {
-                text: 'Monthly Average Temperature'
+                text: 'Hello World!'
             },
             subtitle: {
-                text: 'Source: WorldClimate.com'
+                text: ''
             },
             xAxis: {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
