@@ -99,6 +99,7 @@ local.properties
 # sbteclipse plugin
 .target
 
+
 # Tern plugin
 .tern-project
 
@@ -113,5 +114,6 @@ local.properties
 *.iml
 #.gitignore
 .idea/
-
+target/
 work/
+rebel.xml

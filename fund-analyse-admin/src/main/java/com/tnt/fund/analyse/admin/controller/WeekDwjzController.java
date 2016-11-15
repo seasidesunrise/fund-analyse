@@ -1,6 +1,8 @@
 package com.tnt.fund.analyse.admin.controller;
 
+import com.tnt.fund.analyse.service.entity.FundCode;
 import com.tnt.fund.analyse.service.entity.FundValue;
+import com.tnt.fund.analyse.service.service.FundCodeService;
 import com.tnt.fund.analyse.service.service.FundValueService;
 import com.tnt.fund.analyse.util.DateUtil;
 import com.tnt.fund.analyse.util.DateWeekUtil;
@@ -25,11 +27,19 @@ public class WeekDwjzController {
     @Resource
     private FundValueService fundValueService;
 
+    @Resource
+    private FundCodeService fundCodeService;
+
     @RequestMapping("/week2")
     @ResponseBody
     public ModelAndView week2(HttpServletRequest request) {
         String fcode = request.getParameter("fcode");
         log.info("fcode: " + fcode);
+        if (fcode == null) {
+            fcode = "000961";
+        }
+
+        FundCode fundCode = fundCodeService.get(fcode);
 
         Map<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("fundCode", fcode);
@@ -107,6 +117,7 @@ public class WeekDwjzController {
         mv.setViewName("weekstock");
         mv.addObject("dwjzListWithArray", dwjzListWithArray);
         mv.addObject("maxCC", dwjzListWithArray.size());
+        mv.addObject("fundCode", fundCode);
 
         return mv;
     }
@@ -117,6 +128,12 @@ public class WeekDwjzController {
         String fcode = request.getParameter("fcode");
         String lastPot = request.getParameter("last");
         log.info("fcode: " + fcode  + ", lastPot: " + lastPot);
+        if (fcode == null) {
+            fcode = "000961";
+        }
+
+        FundCode fundCode = fundCodeService.get(fcode);
+
         int last = 0;
         if (lastPot != null) {
             last = Integer.parseInt(lastPot);
@@ -195,7 +212,7 @@ public class WeekDwjzController {
         }
         mv.setViewName("week");
         mv.addObject("title", "titleTest"); // just for test for jrebel
-
+        mv.addObject("fundCode", fundCode);
         return mv;
     }
 

@@ -42,7 +42,7 @@ public class HistoryDataCrawler {
 //        }
 
 
-        String fcode = "000961";
+        String fcode = "340007"; //"000961";
         historyDataCrawler.importFundValue(fcode);
     }
 
